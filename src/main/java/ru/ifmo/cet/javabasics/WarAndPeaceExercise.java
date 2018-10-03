@@ -14,41 +14,16 @@ import java.util.*;
 import java.io.File;
 import java.io.FileReader;
 
+import static java.nio.file.Files.readAllLines;
+
 
 public class WarAndPeaceExercise {
-
+    public static Map<String, Integer> words = new HashMap<>();
     public static String warAndPeace() throws IOException {
         final Path tome12Path = Paths.get("src", "main", "resources", "WAP12.txt");
         final Path tome34Path = Paths.get("src", "main", "resources", "WAP34.txt");
-
-        String strPath12 = tome12Path.toString();
-        String content12 = new String(Files.readAllBytes(Paths.get(strPath12)));
-        content12 = content12.toLowerCase();
-
-        String strPath34 = tome34Path.toString();
-        String content34 = new String(Files.readAllBytes(Paths.get(strPath34)));
-        content34 = content34.toLowerCase();
-
-        String[] subStr1;
-        subStr1 = content12.split("[^a-zа-я]");
-        String[] subStr2;
-        subStr2 = content34.split("[^a-zа-я]");
-
-        ArrayList<String> subStr = new ArrayList<>();
-
-        subStr.addAll(Arrays.asList(subStr1));
-        subStr.addAll(Arrays.asList(subStr2));
-        Map<String, Integer> words = new HashMap<>();
-
-        for (String aSubStr : subStr) {
-            if ((aSubStr.length() > 3)) {
-                if (!words.containsKey(aSubStr))
-                    words.put(aSubStr, 1);
-                else {
-                    words.put(aSubStr, words.get(aSubStr) + 1);
-                }
-            }
-        }
+        findWord(tome12Path);
+        findWord(tome34Path);
 
         List<Map.Entry<String,Integer>> sortMap = new ArrayList<>(words.entrySet());
 
@@ -63,7 +38,6 @@ public class WarAndPeaceExercise {
         });
 
         String result = "";
-
         for(Map.Entry entry: sortMap){
             String key = (String) entry.getKey();
             Integer value = (Integer) entry.getValue();
@@ -71,8 +45,23 @@ public class WarAndPeaceExercise {
                 result += key + " - " + value + "\n";
             }
         }
-        return result.trim();
+        return result.substring(0,result.length()-1);
         //throw new UnsupportedOperationException(result.substring(0,result.length() - 1));
     }
 
+    private static void findWord(Path path) throws IOException {
+        for (String line : readAllLines(path, Charset.forName("windows-1251"))) {
+            line = line.replaceAll("[^а-яА-Яa-zA-Z]", " ");
+            for (String word : line.split(" ")) {
+                if (word.length() > 3) {
+                    word = word.toLowerCase();
+                    if (words.containsKey(word)) {
+                        words.put(word, words.get(word) + 1);
+                    } else {
+                        words.put(word, 1);
+                    }
+                }
+            }
+        }
+    }
 }
