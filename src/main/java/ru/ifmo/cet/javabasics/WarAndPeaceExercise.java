@@ -52,8 +52,7 @@ public class WarAndPeaceExercise {
 
         List<Map.Entry<String,Integer>> sortMap = new ArrayList<>(words.entrySet());
 
-
-        Collections.sort(sortMap, new Comparator<Map.Entry<String, Integer>>() {
+        Collections.sort(sortMap, new Comparator<Map.Entry<String,Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
                 if(o1.getValue().equals(o2.getValue()))
@@ -72,13 +71,8 @@ public class WarAndPeaceExercise {
                 result += key + " - " + value + "\n";
             }
         }
-        // TODO map lowercased words to its amount in text and concatenate its entries.
-        // TODO If word "котик" occurred in text 23 times then its entry would be "котик - 23\n".
-        // TODO Entries in final String should be also sorted by amount and then in alphabetical order if needed.
-        // TODO Also omit any word with lengths less than 4 and frequency less than 10
-        //System.out.println(result);
         return result.trim();
-        //throw new UnsupportedOperationException(result);
+        //throw new UnsupportedOperationException(result.substring(0,result.length() - 1));
     }
 
 }
