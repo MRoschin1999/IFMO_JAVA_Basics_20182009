@@ -30,9 +30,9 @@ public class WarAndPeaceExercise {
         content34 = content34.toLowerCase();
 
         String[] subStr1;
-        subStr1 = content12.split("[^a-zA-Zа-яА-Я]");
+        subStr1 = content12.split("[^a-zа-я]");
         String[] subStr2;
-        subStr2 = content34.split("[^a-zA-Zа-яА-Я]");
+        subStr2 = content34.split("[^a-zа-я]");
 
         ArrayList<String> subStr = new ArrayList<>();
 
