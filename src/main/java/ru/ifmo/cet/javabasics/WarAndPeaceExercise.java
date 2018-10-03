@@ -1,5 +1,9 @@
 package ru.ifmo.cet.javabasics;
-
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -48,14 +52,14 @@ public class WarAndPeaceExercise {
 
         List<Map.Entry<String,Integer>> sortMap = new ArrayList<>(words.entrySet());
 
-        sortMap.sort(new Comparator<Map.Entry<String, Integer>>() {
+
+        Collections.sort(sortMap, new Comparator<Map.Entry<String, Integer>>() {
             @Override
             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                if (o1.getValue().equals(o2.getValue()))
+                if(o1.getValue().equals(o2.getValue()))
                     return o1.getKey().compareTo(o2.getKey());
                 else
                     return o2.getValue().compareTo(o1.getValue());
-
             }
         });
 
@@ -73,7 +77,7 @@ public class WarAndPeaceExercise {
         // TODO Entries in final String should be also sorted by amount and then in alphabetical order if needed.
         // TODO Also omit any word with lengths less than 4 and frequency less than 10
         //System.out.println(result);
-        return result.substring(0, result.length()-1);
+        return result.trim();
         //throw new UnsupportedOperationException(result);
     }
 
