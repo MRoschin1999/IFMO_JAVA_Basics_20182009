@@ -45,7 +45,7 @@ public class WarAndPeaceExercise {
                 result += key + " - " + value + "\n";
             }
         }
-        return result.substring(0,result.length()-1);
+        return result.trim();
         //throw new UnsupportedOperationException(result.substring(0,result.length() - 1));
     }
 
