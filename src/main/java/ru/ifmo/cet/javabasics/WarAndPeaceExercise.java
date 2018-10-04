@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class WarAndPeaceExercise {
-    public static Map<String, Integer> words = new HashMap<>();
+    private static Map<String, Integer> words = new HashMap<>();
 
     public static String warAndPeace() throws IOException {
         final Path tome12Path = Paths.get("src", "main", "resources", "WAP12.txt");
@@ -21,12 +21,10 @@ public class WarAndPeaceExercise {
 
         List<Map.Entry<String,Integer>> sortMap = new ArrayList<>(words.entrySet());
 
-        Collections.sort(sortMap, (o1, o2) ->
-            (o1.getValue().equals(o2.getValue())) ? (o1.getKey().compareTo(o2.getKey())) : (o2.getValue().compareTo(o1.getValue())));
+        sortMap.sort((o1, o2) ->
+                (o1.getValue().equals(o2.getValue())) ? (o1.getKey().compareTo(o2.getKey())) : (o2.getValue().compareTo(o1.getValue())));
 
-        String result = sortMap.stream().filter(len -> len.getValue() >= 10).map(get -> get.getKey() + " - " + get.getValue()).collect(Collectors.joining("\n"));
-
-        return result;
+        return sortMap.stream().filter(len -> len.getValue() >= 10).map(get -> get.getKey() + " - " + get.getValue()).collect(Collectors.joining("\n"));
     }
 
     private static void find(Path path) throws IOException {
