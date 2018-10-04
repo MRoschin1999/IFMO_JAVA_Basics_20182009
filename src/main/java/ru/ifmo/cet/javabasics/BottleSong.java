@@ -1,5 +1,4 @@
 package ru.ifmo.cet.javabasics;
-
 /**
  * Нужно реализовать констурктор и метод, возвращающий слова песни про бутылки на стене.
  * <p>
@@ -31,51 +30,42 @@ package ru.ifmo.cet.javabasics;
  * Нужно ограничить возможность взятия бутылок натуральным число не более 99 бутылок за раз.
  */
 public class BottleSong {
-    int btao;
-
-    public BottleSong(int bottleTakenAtOnce) {
+    private int btao;
+    BottleSong(int bottleTakenAtOnce)
+    {
         this.btao = bottleTakenAtOnce;
     }
 
     public String getBottleSongLyrics() {
-        //TODO
         if ((this.btao < 100) & (this.btao > 0))
         {
-            String final1 = "";
+            StringBuilder final1 = new StringBuilder();
             Integer bottles = 99;
-            Integer tmpBottles = 99;
+            Integer tmpBottles;
             String strbtao = getBottle(this.btao);
             while (bottles > this.btao) {
                 tmpBottles = bottles - this.btao;
                 if (tmpBottles>1) {
-                    final1 += bottles.toString() + " bottles of beer on the wall, " + bottles.toString() + " bottles of beer.\n" +
-                            "Take " + strbtao + "down and pass around, " + tmpBottles.toString() + " bottles of beer on the wall.\n";
+                    final1.append(bottles.toString()).append(" bottles of beer on the wall, ").append(bottles.toString()).append(" bottles of beer.\n").append("Take ").append(strbtao).append("down and pass around, ").append(tmpBottles.toString()).append(" bottles of beer on the wall.\n");
                 }
                 else{
-                    final1 += bottles.toString() + " bottles of beer on the wall, " + bottles.toString() + " bottles of beer.\n" +
-                            "Take " + strbtao + "down and pass around, " + tmpBottles.toString() + " bottle of beer on the wall.\n";
+                    final1.append(bottles.toString()).append(" bottles of beer on the wall, ").append(bottles.toString()).append(" bottles of beer.\n").append("Take ").append(strbtao).append("down and pass around, ").append(tmpBottles.toString()).append(" bottle of beer on the wall.\n");
                 }
                 bottles = tmpBottles;
             }
             if ( bottles > 1) {
-                final1 += bottles.toString() + " bottles of beer on the wall, " + bottles.toString() + " bottles of beer.\n" +
-                        "Take " + getBottle(bottles) + "down and pass around, no more bottles of beer on the wall.\n" +
-                        "No more bottles of beer on the wall, no more bottles of beer.\n" +
-                        "Go to the store and buy some more, 99 bottles of beer on the wall.\n";
+                final1.append(bottles.toString()).append(" bottles of beer on the wall, ").append(bottles.toString()).append(" bottles of beer.\n").append("Take ").append(getBottle(bottles)).append("down and pass around, no more bottles of beer on the wall.\n").append("No more bottles of beer on the wall, no more bottles of beer.\n").append("Go to the store and buy some more, 99 bottles of beer on the wall.\n");
             }
             else{
-                final1 += bottles.toString() + " bottle of beer on the wall, " + bottles.toString() + " bottle of beer.\n" +
-                        "Take " + getBottle(bottles) + "down and pass around, no more bottles of beer on the wall.\n" +
-                        "No more bottles of beer on the wall, no more bottles of beer.\n" +
-                        "Go to the store and buy some more, 99 bottles of beer on the wall.\n";
+                final1.append(bottles.toString()).append(" bottle of beer on the wall, ").append(bottles.toString()).append(" bottle of beer.\n").append("Take ").append(getBottle(bottles)).append("down and pass around, no more bottles of beer on the wall.\n").append("No more bottles of beer on the wall, no more bottles of beer.\n").append("Go to the store and buy some more, 99 bottles of beer on the wall.\n");
             }
-            return final1;
+            return final1.toString();
         }
         else {
             throw new IllegalArgumentException();
         }
     }
-    public String getBottle(int number){
+    private String getBottle(int number){
         String str = "";
         if(number < 20) {
             switch (number) {
