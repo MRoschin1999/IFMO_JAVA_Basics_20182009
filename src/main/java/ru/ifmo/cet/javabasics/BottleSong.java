@@ -66,9 +66,11 @@ public class BottleSong {
         }
     }
     private String getBottle(int number){
-        String str = "";
+        String str;
         if(number < 20) {
             switch (number) {
+                default: str = "Error ";
+                    break;
                 case 1: str = "one ";
                     break;
                 case 2: str = "two ";
@@ -111,6 +113,8 @@ public class BottleSong {
         }
         else{
             switch (number / 10) {
+                default: str = "Error ";
+                    break;
                 case 2: str = "twenty ";
                     break;
                 case 3: str = "thirty ";
@@ -129,6 +133,8 @@ public class BottleSong {
                     break;
             }
             switch (number % 10) {
+                default: str = "Error ";
+                    break;
                 case 0: str += "";
                     break;
                 case 1: str += "one ";
